@@ -29,14 +29,32 @@ Total incoming rows approved: 350 """
 
 approved_tables = ["users", "orders"]
 
-incoming_1 = "  PAYMENTS  "
-incoming_2 = ""
-incoming_3 = "  Shipping_Logs"
+file_1 = "  PAYMENTS.CSV  "
+rows_1 = "350"
 
-incoming_1_clean = incoming_1.strip().lower()
-incoming_3_clean = incoming_3.strip().lower()
-approved_tables.append(incoming_1_clean)
-approved_tables.append(incoming_3_clean)
-print(approved_tables)
-print(f"Total tables ready:{len(approved_tables)}")
+file_2 = "  SHIPPING.PARQUET  "
+rows_2 = "500"
 
+file_3 = "  returns.csv  "
+rows_3 = "0"
+
+total_approved_rows = 0
+
+clean_1 = file_1.strip().lower()
+if clean_1.endswith(".csv") and int(rows_1) > 0:
+    approved_tables.append(clean_1)
+    total_approved_rows += int(rows_1)
+
+clean_2 = file_2.strip().lower()
+if clean_2.endswith(".csv") and int(rows_2) > 0:
+    approved_tables.append(clean_2)
+    total_approved_rows += int(rows_2)
+
+clean_3 = file_3.strip().lower()
+if clean_3.endswith(".csv") and int(rows_3) > 0:
+    approved_tables.append(clean_3)
+    total_approved_rows += int(rows_3)
+
+print(f"Approved tables: {approved_tables}")
+print(f"Total tables ready: {len(approved_tables)}")
+print(f"Total incoming rows approved: {total_approved_rows}")
